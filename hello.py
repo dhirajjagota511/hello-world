@@ -1,5 +1,24 @@
 import requests
 
+def get_weather_emoji(description):
+    description = description.lower()
+    if "thunder" in description:
+        return "⛈️"
+    elif "snow" in description or "blizzard" in description or "ice" in description:
+        return "❄️"
+    elif "rain" in description or "drizzle" in description or "shower" in description:
+        return "🌧️"
+    elif "fog" in description or "mist" in description or "haze" in description:
+        return "🌫️"
+    elif "overcast" in description:
+        return "☁️"
+    elif "cloud" in description:
+        return "⛅"
+    elif "sunny" in description or "clear" in description:
+        return "☀️"
+    else:
+        return "🌡️"
+
 def get_weather():
     city = input("Enter a city: ").strip()
     if not city:
@@ -20,7 +39,8 @@ def get_weather():
         current = data["current_condition"][0]
         temp_c = current["temp_C"]
         description = current["weatherDesc"][0]["value"]
-        print(f"Weather in {city}: {temp_c}°C, {description}")
+        emoji = get_weather_emoji(description)
+        print(f"{emoji} Weather in {city}: {temp_c}°C, {description} {emoji}")
     except Exception as e:
         print("Sorry, something went wrong. Please try again.")
         return
