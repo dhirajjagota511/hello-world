@@ -19,6 +19,10 @@ def get_weather_emoji(description):
     else:
         return "🌡️"
 
+def print_emoji_banner(emoji, rows=3, cols=5):
+    for _ in range(rows):
+        print(emoji * cols)
+
 def get_weather():
     city = input("Enter a city: ").strip()
     if not city:
@@ -40,7 +44,8 @@ def get_weather():
         temp_c = current["temp_C"]
         description = current["weatherDesc"][0]["value"]
         emoji = get_weather_emoji(description)
-        print(f"{emoji} Weather in {city}: {temp_c}°C, {description} {emoji}")
+        print_emoji_banner(emoji)
+        print(f"Weather in {city}: {temp_c}°C, {description}")
     except Exception as e:
         print("Sorry, something went wrong. Please try again.")
         return
